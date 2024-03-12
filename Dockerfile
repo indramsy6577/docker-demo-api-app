@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED 1
 copy ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
-RUM mkdir /app
+RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
 
