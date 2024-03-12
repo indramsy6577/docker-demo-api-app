@@ -30,8 +30,8 @@ COPY ./app /app
 # Command to run the application
 CMD ["python", "app.py"]
 
-# Informasi pembaruan pip
 RUN pip install --upgrade pip \
     && echo "[notice] A new release of pip is available: $(pip --version | cut -d ' ' -f 2) -> $(pip search pip | grep -oP '^pip \(\K[^\)]+') \
     && echo '[notice] To update, run: pip install --upgrade pip'
+
 
