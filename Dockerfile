@@ -31,7 +31,7 @@ COPY ./app /app
 CMD ["python", "app.py"]
 
 RUN pip install --upgrade pip \
-    && echo "[notice] A new release of pip is available: $(pip --version | cut -d ' ' -f 2) -> $(pip search pip | grep -oP '^pip \(\K[^\)]+')" \
-    && echo "[notice] To update, run: pip install --upgrade pip"
+    && echo "[notice] A new release of pip is available: $(pip --version | cut -d ' ' -f 2) -> $(pip search pip | sed -n 3p | cut -d '(' -f 2 | cut -d ')' -f 1)" \
+    && echo "[notice] To update, run: python -m pip install --upgrade pip"
 
 
