@@ -13,7 +13,7 @@ WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
 
 # Install dependencies using non-root user
-RUN pip install --no-cache-dir --user -r /app/requirements.txt
+RUN pip install --no-cache-dir --user --no-warn-script-location -r /app/requirements.txt
 
 # Add .local/bin to PATH
 ENV PATH="/home/user/.local/bin:${PATH}"
