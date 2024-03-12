@@ -1,14 +1,29 @@
 FROM python:3.7-alpine
 
+# Set environment variable
 ENV PYTHONUNBUFFERED 1
 
-copy ./requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
-RUN pip install --upgrade pip 
+# Create a new user
+RUN adduser -D user
 
-RUN mkdir /app
+# Set the working directory
 WORKDIR /app
+
+# Copy requirements file
+COPY ./requirements.txt /app/requirements.txt
+
+# Install dependencies using non-root user
+RUN pip install --no-cache-dir --user -r /app/requirements.txt
+
+# Change ownership of application directory to non-root user
+RUN chown -R user:user /app
+
+# Switch to non-root user
+USER user
+
+# Copy application code
 COPY ./app /app
 
-RUN adduser -D user
-User user
+# Command to run the application
+CMD ["python", "app.py"]
+
